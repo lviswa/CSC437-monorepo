@@ -1,0 +1,23 @@
+{
+  "name": "csc437-monorepo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lviswa/CSC437-monorepo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lviswa/CSC437-monorepo/issues"
+  },
+  "homepage": "https://github.com/lviswa/CSC437-monorepo#readme",
+  "description": "",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
