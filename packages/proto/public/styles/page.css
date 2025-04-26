@@ -2,41 +2,95 @@
 body {
     background-color: var(--color-background-page);
     color: var(--color-text-default);
-    font-family: var(--font-family-default);
+    font-family: 'Cormorant Garamond', Georgia, serif;
     margin: 0;
     padding: 2rem;
   }
   
-  /* hader style */
-  header {
+  /* header container */
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     background-color: var(--color-background-header);
-    color: var(--color-text-header);
-    padding: 2rem;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+  }
+  
+  /* center content block (CULTURA + nav) */
+  .header-center {
+    flex-grow: 1;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
   
-  header h1 {
+  /* CULTURA title */
+  .site-title {
+    font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
+    font-weight: 700;
     margin: 0;
+    color: black;
   }
   
+  /* Navigation under CULTURA */
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 0.75rem;
+  }
   
-  /* accent color for links */
-  a {
-    color: var(--color-accent);
+  .nav-links a {
+    color: black;
     text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-family: 'Cormorant Garamond', serif;
   }
   
-  /* accent color for headings */
-  p:first-of-type,
-h2 {
-  font-size: 1.5rem;
-  color: var(--color-accent-alt);
-}
-  
-  /* hover effect on links */
-  a:hover {
+  .nav-links a:hover {
     text-decoration: underline;
+  }
+  
+  /* icon buttons container (right side) */
+  .icon-buttons {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  
+  /* icon button circle */
+  .icon-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 50%;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  
+  /* icon inside the circle */
+  .icon-button .icon {
+    width: 2rem;
+    height: 2rem;
+    fill: currentColor;
+  }
+  
+  /* user icon slightly larger */
+  .icon-button .icon-user {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+  
+  /* hover effect for icons */
+  .icon-button:hover {
+    background-color: var(--color-accent);
+    transform: scale(1.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   }
   
