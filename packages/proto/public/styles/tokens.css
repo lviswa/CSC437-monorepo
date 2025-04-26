@@ -1,0 +1,11 @@
+:root {
+    --color-background-page: #ffffff;         /* white */
+    --color-background-header: #d9ead3;       /* light green */
+    --color-text-default: #000000;             /* black */
+    --color-text-header: #000000;              /* black */
+    --color-accent: #ff9933;                   /* saffron orange */
+    --color-accent-alt: #800000;               /* maroon */
+  
+    --font-family-default: 'Segoe UI', sans-serif;
+  }
+  
