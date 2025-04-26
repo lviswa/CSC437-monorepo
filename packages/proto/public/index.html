@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <title>Indian Clothing Marketplace</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
+  <link rel="stylesheet" href="/styles/reset.css">
   <link rel="stylesheet" href="/styles/tokens.css">
   <link rel="stylesheet" href="/styles/page.css">
 </head>
@@ -33,23 +32,29 @@
       <a href="#" class="icon-button">
         <svg class="icon"><use href="/icons/ui.svg#icon-home" /></svg>
       </a>
-      <a href="#" class="icon-button">
-        <svg class="icon icon-user"><use href="/icons/ui.svg#icon-user" /></svg>
+      <a href="#" class="icon icon-user">
+        <use href="/icons/ui.svg#icon-user" />
       </a>
     </div>
   </header>
 
-  <h2>Browse available products:</h2>
-  <ul>
-    <li><a href="product1.html">Blue Mirror Work Saree</a></li>
-    <li><a href="product2.html">Red Banarasi Lehenga</a></li>
-  </ul>
+  <main>
+    <section class="product-section">
+      <h2>Browse available products:</h2>
+      <ul>
+        <li><a href="product1.html">Blue Mirror Work Saree</a></li>
+        <li><a href="product2.html">Red Banarasi Lehenga</a></li>
+      </ul>
+    </section>
 
-  <h2>Other Pages</h2>
-  <ul>
-    <li><a href="seller1.html">Seller: Priya Sharma</a></li>
-    <li><a href="order1.html">Order #A103</a></li>
-    <li><a href="buyer1.html">Buyer: Aarti Patel</a></li>
-  </ul>
+    <section class="other-pages-section">
+      <h2>Other Pages</h2>
+      <ul>
+        <li><a href="seller1.html">Seller: Priya Sharma</a></li>
+        <li><a href="order1.html">Order #A103</a></li>
+        <li><a href="buyer1.html">Buyer: Aarti Patel</a></li>
+      </ul>
+    </section>
+  </main>
 </body>
 </html>
