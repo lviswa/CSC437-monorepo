@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Indian Clothing Marketplace</title>
+  <title>Desi Threads</title>
 
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
+  <!-- CSS -->
   <link rel="stylesheet" href="/styles/reset.css">
   <link rel="stylesheet" href="/styles/tokens.css">
   <link rel="stylesheet" href="/styles/page.css">
@@ -15,15 +17,17 @@
 
 <body>
   <header class="site-header">
-    <div class="header-center">
-      <h1 class="site-title">CULTURA</h1>
-      <nav class="nav-links">
-        <a href="#">Shop All</a>
-        <a href="#">Women</a>
-        <a href="#">Men</a>
-        <a href="#">Accessories</a>
-      </nav>
+    <div class="logo-container">
+      <img src="/assets/logo.png" class="logo-img" alt="Cultura Logo">
+      <h1 class="site-title">DESI THREADS</h1>
     </div>
+
+    <nav class="nav-links">
+      <a href="/shop-all.html">Shop All</a>
+      <a href="/women-clothing.html">Women</a>
+      <a href="/men.html">Men</a>
+      <a href="/accessories.html">Accessories</a>
+    </nav>    
 
     <div class="icon-buttons">
       <a href="#" class="icon-button">
@@ -32,29 +36,52 @@
       <a href="#" class="icon-button">
         <svg class="icon"><use href="/icons/ui.svg#icon-home" /></svg>
       </a>
-      <a href="#" class="icon icon-user">
-        <use href="/icons/ui.svg#icon-user" />
-      </a>
+      <a href="#" class="icon-button">
+        <svg class="icon icon-user">
+          <use href="/icons/ui.svg#icon-user" />
+        </svg>
+      </a>      
     </div>
   </header>
 
   <main>
-    <section class="product-section">
-      <h2>Browse available products:</h2>
-      <ul>
-        <li><a href="product1.html">Blue Mirror Work Saree</a></li>
-        <li><a href="product2.html">Red Banarasi Lehenga</a></li>
-      </ul>
+    <!-- Section 1: Hero -->
+    <section class="hero-section">
+      <h1>DESI THREADS</h1>
+      <p class="catchphrase">Sustainable Indian Fashion, Redefined.</p>
+      <a href="#explore" class="explore-button">Explore</a>
     </section>
 
-    <section class="other-pages-section">
-      <h2>Other Pages</h2>
-      <ul>
-        <li><a href="seller1.html">Seller: Priya Sharma</a></li>
-        <li><a href="order1.html">Order #A103</a></li>
-        <li><a href="buyer1.html">Buyer: Aarti Patel</a></li>
-      </ul>
+    <!-- Section 2: Explore Women -->
+    <section class="women-collection" id="explore">
+      <div class="text-content">
+        <h2>Explore Our Women's Collection</h2>
+        <p>Dive into curated sarees, lehengas, and more — celebrate tradition while embracing sustainability through preloved fashion treasures.</p>
+        <a href="#" class="shop-button">Shop Now</a>
+      </div>
+      <div class="image-content">
+        <img src="/assets/woman-collection.png" alt="Indian Woman Wearing Saree">
+      </div>
     </section>
+
+    <!-- Section 3: Featured Men's Fashion -->
+    <section class="men-collection">
+      <div class="image-content">
+        <img src="/assets/mens-fashion.png" alt="Indian Men's Fashion">
+      </div>
+      <div class="text-content">
+        <h2>Featured Men's Fashion</h2>
+        <p>Discover the elegance and charm of traditional Indian menswear. From embroidered kurtas to sherwanis, find sustainable styles that impress.</p>
+        <a href="#" class="shop-button">Shop Now</a>
+      </div>
+    </section>
+
+    <!-- Section 4: Why Desi Threads -->
+    <section class="why-desi-threads">
+      <h2>Why Desi Threads?</h2>
+      <p>We believe fashion should honor tradition and the planet. By giving a second life to timeless Indian clothing, Desi Threads empowers sustainability without sacrificing style. Join us in embracing eco-conscious fashion with deep-rooted cultural beauty.</p>
+    </section>
+
   </main>
 </body>
 </html>

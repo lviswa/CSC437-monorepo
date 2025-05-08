@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Women Collection - Desi Threads</title>
+
+  <link rel="stylesheet" href="/styles/reset.css">
+  <link rel="stylesheet" href="/styles/tokens.css">
+  <link rel="stylesheet" href="/styles/page.css">
+  <link rel="stylesheet" href="/styles/shop.css"> 
+
+  <script defer>
+    window.addEventListener("DOMContentLoaded", () => {
+      const priceSlider = document.getElementById("price-slider");
+      const priceValue = document.getElementById("price-value");
+
+      priceSlider.addEventListener("input", () => {
+        priceValue.textContent = `$${priceSlider.value}`;
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="logo-container">
+      <a href="/index.html" class="logo-link">
+        <img src="/assets/logo.png" class="logo-img" alt="Desi Threads Logo">
+        <span class="site-title">DESI THREADS</span>
+      </a>
+    </div>              
+
+    <nav class="nav-links">
+      <a href="/shop-all.html">Shop All</a>
+      <a href="/women-clothing.html">Women</a>
+      <a href="/men-clothing.html">Men</a>
+      <a href="/accessories.html">Accessories</a>
+    </nav>
+
+    <div class="icon-buttons">
+      <a href="#" class="icon-button">
+        <svg class="icon"><use href="/icons/ui.svg#icon-cart" /></svg>
+      </a>
+      <a href="#" class="icon-button">
+        <svg class="icon"><use href="/icons/ui.svg#icon-home" /></svg>
+      </a>
+      <a href="#" class="icon-button">
+        <svg class="icon icon-user"><use href="/icons/ui.svg#icon-user" /></svg>
+      </a>
+    </div>
+  </header>          
+
+  <main class="shop-page">
+    <aside class="filters">
+      <h2>Filters</h2>
+
+      <div class="filter-group">
+        <label>Waist Size (in):</label>
+        <div class="size-options">
+          <button type="button">25</button>
+          <button type="button">26</button>
+          <button type="button">27</button>
+          <button type="button">28</button>
+          <button type="button">29</button>
+          <button type="button">30</button>
+          <button type="button">30+</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label>Price Range: <span id="price-value">$0</span> – $5,000</label>
+        <input type="range" min="0" max="5000" value="0" step="50" id="price-slider">
+      </div>
+
+      <div class="filter-group">
+        <label>Color:</label>
+        <div class="color-options">
+          <span class="color red"></span>
+          <span class="color blue"></span>
+          <span class="color black"></span>
+          <span class="color orange"></span>
+          <span class="color yellow"></span>
+          <span class="color pink"></span>
+          <span class="color purple"></span>
+          <span class="color green"></span>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label>Condition:</label>
+        <div class="condition-options">
+          <label><input type="radio" name="condition"> New</label>
+          <label><input type="radio" name="condition"> Excellent</label>
+          <label><input type="radio" name="condition"> Good</label>
+          <label><input type="radio" name="condition"> Fair</label>
+          <label><input type="radio" name="condition"> Old</label>
+        </div>
+      </div>
+    </aside>
+
+    <section class="product-grid">
+      <div class="product-card">
+        <img src="/assets/tropical-lehenga.png" alt="Tropical Lehenga">
+        <div class="product-info">
+          <h3>Tropical Lehenga</h3>
+          <p>$157</p>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="/assets/baby-pink.png" alt="Baby Pink Lehenga">
+        <div class="product-info">
+          <h3>Baby Pink Lehenga</h3>
+          <p>$103</p>
+        </div>
+      </div>
+
+      <!-- Add more product-card divs as needed -->
+    </section>
+  </main>
+</body>
+</html>
