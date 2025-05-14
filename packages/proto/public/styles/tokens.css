@@ -1,11 +1,21 @@
 :root {
-    --color-background-page: #ffffff;         /* white */
-    --color-background-header: #95bf86;       /* light green */
-    --color-text-default: #000000;             /* black */
-    --color-text-header: #000000;              /* black */
-    --color-accent: #ff9933;                   /* saffron orange */
-    --color-accent-alt: #800000;               /* maroon */
-  
-    --font-family-default: 'Segoe UI', sans-serif;
-  }
-  
+  --color-background-page: #ffffff;         
+  --color-background-header: #95bf86;       
+  --color-text-default: #000000;           
+  --color-text-header: #000000;             
+  --color-accent: #ff9933;                  
+  --color-accent-alt: #800000;             
+  --color-accent-hover: #cc7a00;            
+
+  --font-family-default: 'Segoe UI', sans-serif;
+}
+
+body.dark-mode {
+  --color-background-page: #111;                 
+  --color-background-header: #1e3d2f;            
+  --color-text-default: #f0f0f0;                 
+  --color-text-header: #000000;
+  --color-accent: #ffcc66;                       
+  --color-accent-alt: #ff9999;                   
+  --color-accent-hover: #e6b84f;                 
+}
