@@ -1,0 +1,23 @@
+[
+    {
+      "name": "Baby Pink Lehenga",
+      "price": "$125",
+      "imgSrc": "/assets/baby-pink.png"
+    },
+    {
+      "name": "Tropical Lehenga",
+      "price": "$157",
+      "imgSrc": "/assets/tropical-lehenga.png"
+    },
+    {
+      "name": "Blush Bridal Lehenga",
+      "price": "$579",
+      "imgSrc": "/assets/blush-lehenga.png"
+    },
+    {
+      "name": "Ocean Blue Lehenga",
+      "price": "$323",
+      "imgSrc": "/assets/blue-lehenga.png"
+    }
+  ]
+  

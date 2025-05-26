@@ -98,28 +98,21 @@
       </div>
     </aside>
 
-    <section class="product-grid">
-      <desi-product
-        img-src="/assets/tropical-lehenga.png"
-        name="Tropical Lehenga"
-        price="$157"
-      ></desi-product>
-
-      <desi-product
-        img-src="/assets/baby-pink.png"
-        name="Baby Pink Lehenga"
-        price="$125"
-      ></desi-product>
+    <section>
+      <!-- ✅ Render products from JSON dynamically -->
+      <desi-products src="/data/products.json"></desi-products>
     </section>
   </main>
 
-  <!-- Import custom element module -->
+  <!-- ✅ Import the custom components -->
   <script type="module">
     import { define } from "@calpoly/mustang";
     import { DesiProductElement } from "/src/desi-product.ts";
+    import { DesiProductsElement } from "/src/desi-products.ts";
 
     define({
-      "desi-product": DesiProductElement
+      "desi-product": DesiProductElement,
+      "desi-products": DesiProductsElement
     });
   </script>
 </body>
