@@ -24,6 +24,7 @@ module.exports = __toCommonJS(product_svc_exports);
 var import_mongoose = require("mongoose");
 const ProductSchema = new import_mongoose.Schema(
   {
+    productid: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     price: { type: String, required: true },
     imgSrc: { type: String, required: true }
@@ -34,7 +35,22 @@ const ProductModel = (0, import_mongoose.model)("Product", ProductSchema);
 function index() {
   return ProductModel.find();
 }
-function get(name) {
-  return ProductModel.findOne({ name });
+function get(productid) {
+  return ProductModel.findOne({ productid });
 }
-var product_svc_default = { index, get };
+function create(json) {
+  const p = new ProductModel(json);
+  return p.save();
+}
+function update(productid, product) {
+  return ProductModel.findOneAndUpdate({ productid }, product, { new: true }).then((updated) => {
+    if (!updated) throw `${productid} not updated`;
+    return updated;
+  });
+}
+function remove(productid) {
+  return ProductModel.findOneAndDelete({ productid }).then((deleted) => {
+    if (!deleted) throw `${productid} not deleted`;
+  });
+}
+var product_svc_default = { index, get, create, update, remove };

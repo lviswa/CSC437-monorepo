@@ -1,6 +1,8 @@
 import express, { Request, Response } from "express";
 import { connect } from "./services/mongo";
 import Products from "./services/product-svc";
+import products from "./routes/products";
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -9,6 +11,9 @@ const staticDir = process.env.STATIC || "../proto/dist";
 app.use(express.static(staticDir));
 connect("desithreads"); 
 
+app.use(express.json());
+
+app.use("/api/products", products);
 
 app.get("/products", async (req: Request, res: Response) => {
   const list = await Products.index();
