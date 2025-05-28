@@ -1,23 +1,42 @@
 import express, { Request, Response } from "express";
+import dotenv from "dotenv";
+import path from "path";
 import { connect } from "./services/mongo";
 import Products from "./services/product-svc";
 import products from "./routes/products";
+import auth, { authenticateUser } from "./routes/auth";
+import cors from "cors";
 
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-const staticDir = process.env.STATIC || "../proto/dist";
 
-app.use(express.static(staticDir));
-connect("desithreads"); 
+// connect to MongoDB
+connect("desithreads");
 
+app.use(cors());
 app.use(express.json());
 
-app.use("/api/products", products);
+const PROTO_DIST = path.resolve(__dirname, "../../proto/dist");
+app.use(express.static(PROTO_DIST));
 
-app.get("/products", async (req: Request, res: Response) => {
+const STATIC_HTML_DIR = path.resolve(__dirname, "../../proto");
+app.use(express.static(STATIC_HTML_DIR));
+
+// auth routes
+app.use("/auth", auth);
+
+// protected API
+app.use("/api/products", authenticateUser, products);
+
+app.get("/products", async (_, res: Response) => {
   const list = await Products.index();
-  res.set("Content-Type", "application/json").send(JSON.stringify(list));
+  res.json(list);
+});
+
+app.get("/", (_, res) => {
+  res.sendFile(path.join(PROTO_DIST, "index.html"));
 });
 
 app.listen(port, () => {

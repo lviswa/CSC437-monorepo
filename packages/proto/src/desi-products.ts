@@ -23,14 +23,28 @@ export class DesiProductsElement extends LitElement {
   }
 
   hydrate(src: string) {
-    fetch(src)
-      .then((res) => res.json())
+    const token = localStorage.getItem("authToken");
+  
+    fetch(src, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+        return res.json();
+      })
       .then((json: object) => {
         if (Array.isArray(json)) {
           this.products = json as Array<Product>;
         }
+      })
+      .catch((err) => {
+        console.error("Failed to load products:", err);
       });
-  }
+  }  
 
   render() {
     return html`

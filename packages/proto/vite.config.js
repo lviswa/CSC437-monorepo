@@ -1,8 +1,8 @@
-import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
-import { defineConfig } from 'vite'
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { defineConfig } from 'vite';
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   build: {
@@ -10,10 +10,10 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         women: resolve(__dirname, 'women-clothing.html'),
-        // add any others
+        login: resolve(__dirname, 'login.html'),
       },
     },
     outDir: 'dist',
     emptyOutDir: true
   }
-})
+});

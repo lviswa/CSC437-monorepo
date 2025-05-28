@@ -22,19 +22,31 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var import_express = __toESM(require("express"));
+var import_dotenv = __toESM(require("dotenv"));
+var import_path = __toESM(require("path"));
 var import_mongo = require("./services/mongo");
 var import_product_svc = __toESM(require("./services/product-svc"));
 var import_products = __toESM(require("./routes/products"));
+var import_auth = __toESM(require("./routes/auth"));
+var import_cors = __toESM(require("cors"));
+import_dotenv.default.config();
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
-const staticDir = process.env.STATIC || "../proto/dist";
-app.use(import_express.default.static(staticDir));
 (0, import_mongo.connect)("desithreads");
+app.use((0, import_cors.default)());
 app.use(import_express.default.json());
-app.use("/api/products", import_products.default);
-app.get("/products", async (req, res) => {
+const PROTO_DIST = import_path.default.resolve(__dirname, "../../proto/dist");
+app.use(import_express.default.static(PROTO_DIST));
+const STATIC_HTML_DIR = import_path.default.resolve(__dirname, "../../proto");
+app.use(import_express.default.static(STATIC_HTML_DIR));
+app.use("/auth", import_auth.default);
+app.use("/api/products", import_auth.authenticateUser, import_products.default);
+app.get("/products", async (_, res) => {
   const list = await import_product_svc.default.index();
-  res.set("Content-Type", "application/json").send(JSON.stringify(list));
+  res.json(list);
+});
+app.get("/", (_, res) => {
+  res.sendFile(import_path.default.join(PROTO_DIST, "index.html"));
 });
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
