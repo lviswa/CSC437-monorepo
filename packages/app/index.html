@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Desi Threads SPA</title>
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/page.css" />
+    <link rel="stylesheet" href="/styles/headings.css" />
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <mu-history provides="desi:history">
+      <mu-auth provides="desi:auth" redirect="/login.html">
+        <article class="page">
+          <blazing-header></blazing-header>
+          <mu-switch></mu-switch>
+        </article>
+      </mu-auth>
+    </mu-history>
+  </body>
+</html>
