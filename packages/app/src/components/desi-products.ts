@@ -3,7 +3,6 @@ import { property, state } from "lit/decorators.js";
 import { define } from "@calpoly/mustang";
 import "./desi-product.ts";
 
-// Define the shape of one product
 interface Product {
   name: string;
   price: string;

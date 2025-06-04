@@ -1,6 +1,8 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import path from "path";
+import fs from "node:fs/promises";
+
 import { connect } from "./services/mongo";
 import Products from "./services/product-svc";
 import products from "./routes/products";
@@ -12,33 +14,50 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-// connect to MongoDB
+// Connect to MongoDB
 connect("desithreads");
 
 app.use(cors());
 app.use(express.json());
 
-const PROTO_DIST = path.resolve(__dirname, "../../proto/dist");
-app.use(express.static(PROTO_DIST));
+// Static directory config
+const staticDir = process.env.STATIC
+  ? path.resolve(__dirname, process.env.STATIC)
+  : path.resolve(__dirname, "../../proto/dist");
 
-const STATIC_HTML_DIR = path.resolve(__dirname, "../../proto");
-app.use(express.static(STATIC_HTML_DIR));
+// Serve static files (e.g., CSS, JS, assets)
+app.use(express.static(staticDir));
 
-// auth routes
+// Auth routes
 app.use("/auth", auth);
 
-// protected API
+// Protected product API
 app.use("/api/products", authenticateUser, products);
 
+// Sample unprotected products route for testing
 app.get("/products", async (_, res: Response) => {
   const list = await Products.index();
   res.json(list);
 });
 
-app.get("/", (_, res) => {
-  res.sendFile(path.join(PROTO_DIST, "index.html"));
+// 🔹 Serve SPA for all /app routes
+app.use("/app", async (_req: Request, res: Response) => {
+  const indexHtml = path.join(staticDir, "index.html");
+  try {
+    const html = await fs.readFile(indexHtml, "utf8");
+    res.send(html);
+  } catch (err) {
+    console.error("Failed to load app index.html", err);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
+// 🔸 Optional: Serve index.html at root as fallback
+app.get("/", (_, res) => {
+  res.sendFile(path.join(staticDir, "index.html"));
+});
+
+// Start server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });

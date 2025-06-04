@@ -1,22 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Desi Threads SPA</title>
-    <link rel="stylesheet" href="/styles/tokens.css" />
-    <link rel="stylesheet" href="/styles/reset.css" />
-    <link rel="stylesheet" href="/styles/page.css" />
-    <link rel="stylesheet" href="/styles/headings.css" />
-    <script type="module" src="/src/main.ts"></script>
-  </head>
-  <body>
-    <mu-history provides="desi:history">
-      <mu-auth provides="desi:auth" redirect="/login.html">
+<head>
+  <meta charset="UTF-8">
+  <title>Desi Threads</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/styles/reset.css">
+  <link rel="stylesheet" href="/styles/tokens.css">
+  <link rel="stylesheet" href="/styles/page.css">
+
+  <!-- Your Lit main script for views -->
+  <script type="module" src="/src/main.ts"></script>
+</head>
+
+<body>
+  <mu-history provides="desi:history">
+    <mu-auth provides="desi:auth" redirect="/login.html">
+      <mu-store provides="desi:model">
         <article class="page">
-          <blazing-header></blazing-header>
+          <!-- Header from proto version -->
+          <header class="site-header">
+            <div class="logo-container">
+                <a href="/app" class="logo-link">
+                  <img src="/assets/logo.png" class="logo-img" alt="Cultura Logo" />
+                  <h1 class="site-title">DESI THREADS</h1>
+                </a>
+            </div>
+
+            <nav class="nav-links">
+              <a href="/app">Home</a>
+              <a href="/app/women">Women</a>
+              <a href="/men.html">Men</a>
+              <a href="/accessories.html">Accessories</a>
+            </nav>    
+
+            <div class="icon-buttons">
+              <a href="#" class="icon-button">
+                <svg class="icon"><use href="/icons/ui.svg#icon-cart" /></svg>
+              </a>
+              <a href="#" class="icon-button">
+                <svg class="icon"><use href="/icons/ui.svg#icon-home" /></svg>
+              </a>
+              <a href="#" class="icon-button">
+                <svg class="icon icon-user">
+                  <use href="/icons/ui.svg#icon-user" />
+                </svg>
+              </a>      
+            </div>
+
+            <!-- dark mode toggle -->
+            <label id="dark-mode-toggle" class="dark-mode-switch">
+              <input type="checkbox" autocomplete="off" />
+              Dark Mode
+            </label>
+          </header>
+
+          <!-- Dynamic View Area -->
           <mu-switch></mu-switch>
         </article>
-      </mu-auth>
-    </mu-history>
-  </body>
+      </mu-store>
+    </mu-auth>
+  </mu-history>
+
+  <!-- JS for dark mode toggle -->
+  <script type="module" src="/scripts/dark-mode.js"></script>
+</body>
 </html>

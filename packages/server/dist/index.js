@@ -24,6 +24,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var import_express = __toESM(require("express"));
 var import_dotenv = __toESM(require("dotenv"));
 var import_path = __toESM(require("path"));
+var import_promises = __toESM(require("node:fs/promises"));
 var import_mongo = require("./services/mongo");
 var import_product_svc = __toESM(require("./services/product-svc"));
 var import_products = __toESM(require("./routes/products"));
@@ -35,18 +36,26 @@ const port = process.env.PORT || 3e3;
 (0, import_mongo.connect)("desithreads");
 app.use((0, import_cors.default)());
 app.use(import_express.default.json());
-const PROTO_DIST = import_path.default.resolve(__dirname, "../../proto/dist");
-app.use(import_express.default.static(PROTO_DIST));
-const STATIC_HTML_DIR = import_path.default.resolve(__dirname, "../../proto");
-app.use(import_express.default.static(STATIC_HTML_DIR));
+const staticDir = process.env.STATIC ? import_path.default.resolve(__dirname, process.env.STATIC) : import_path.default.resolve(__dirname, "../../proto/dist");
+app.use(import_express.default.static(staticDir));
 app.use("/auth", import_auth.default);
 app.use("/api/products", import_auth.authenticateUser, import_products.default);
 app.get("/products", async (_, res) => {
   const list = await import_product_svc.default.index();
   res.json(list);
 });
+app.use("/app", async (_req, res) => {
+  const indexHtml = import_path.default.join(staticDir, "index.html");
+  try {
+    const html = await import_promises.default.readFile(indexHtml, "utf8");
+    res.send(html);
+  } catch (err) {
+    console.error("Failed to load app index.html", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
 app.get("/", (_, res) => {
-  res.sendFile(import_path.default.join(PROTO_DIST, "index.html"));
+  res.sendFile(import_path.default.join(staticDir, "index.html"));
 });
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
