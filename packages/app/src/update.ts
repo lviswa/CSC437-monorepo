@@ -24,12 +24,17 @@ export default function update(
 }
 
 function loadProducts(user: Auth.User): Promise<DesiProduct[]> {
-  return fetch("/api/products", {
-    headers: Auth.headers(user),
-  })
-    .then((res) => (res.status === 200 ? res.json() : []))
-    .then((json) => {
-      console.log("Fetched products:", json);
-      return json as DesiProduct[];
-    });
-}
+    return fetch("/api/products", {
+      headers: Auth.headers(user),
+    })
+      .then((res) => (res.status === 200 ? res.json() : []))
+      .then((json) => {
+        return json.map((item: any) => ({
+          id: item.productid,
+          name: item.name,
+          price: parseFloat(item.price.replace("$", "")),
+          image: item.imgSrc,
+          category: "women" 
+        }));
+      });
+}  

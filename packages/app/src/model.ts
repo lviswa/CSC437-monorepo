@@ -1,4 +1,3 @@
-// src/model.ts
 
 export interface DesiProduct {
     id: string;
