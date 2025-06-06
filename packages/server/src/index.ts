@@ -14,27 +14,21 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Connect to MongoDB
 connect("desithreads");
 
 app.use(cors());
 app.use(express.json());
 
-// Set static directory
 const staticDir = process.env.STATIC
   ? path.resolve(__dirname, process.env.STATIC)
   : path.resolve(__dirname, "../../proto/dist");
 
-// Serve static assets (CSS, JS, etc.)
 app.use(express.static(staticDir));
 
-// Auth routes
 app.use("/auth", auth);
 
-// ✅ Protected product routes
 app.use("/api/products", authenticateUser, products);
 
-// 🔍 Optional unprotected GET for testing
 app.get("/products", async (_req, res: Response) => {
   try {
     const list = await Products.index();
@@ -45,7 +39,6 @@ app.get("/products", async (_req, res: Response) => {
   }
 });
 
-// 🔹 Serve index.html for all /app routes (SPA support)
 app.use("/app", async (_req: Request, res: Response) => {
   const indexPath = path.join(staticDir, "index.html");
   try {
@@ -57,12 +50,10 @@ app.use("/app", async (_req: Request, res: Response) => {
   }
 });
 
-// 🔸 Optional fallback to serve SPA from root
 app.get("/", (_req, res) => {
   res.sendFile(path.join(staticDir, "index.html"));
 });
 
-// Start server
 app.listen(port, () => {
   console.log(`🚀 Server running at http://localhost:${port}`);
 });
