@@ -16,6 +16,7 @@ export class WomenViewElement extends View<Model, Msg> {
 
   connectedCallback(): void {
     super.connectedCallback();
+    console.log("Dispatching products/load");
     this.dispatchMessage(["products/load", {}]);
   }
 
@@ -75,8 +76,11 @@ export class WomenViewElement extends View<Model, Msg> {
               (product) => html`
                 <li class="product-card">
                   <img src=${product.image} alt=${product.name} />
-                  <h3>${product.name}</h3>
-                  <p>$${product.price.toFixed(2)}</p>
+                  <div class="product-info">
+                    <h3>${product.name}</h3>
+                    <p>$${product.price.toFixed(2)}</p>
+                    <a class="edit-button" href="/app/product/${product.id}/edit">Edit</a>
+                  <div>
                 </li>
               `
             )}
@@ -199,6 +203,21 @@ export class WomenViewElement extends View<Model, Msg> {
     font-weight: bold;
     color: #555;
   }
+  .edit-button {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    background-color: #222;
+    color: white;
+    text-decoration: none;
+    border-radius: 0.4rem;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+  }
+  
+  .edit-button:hover {
+    background-color: #444;
+  }  
 
   @media (max-width: 768px) {
     .shop-page {

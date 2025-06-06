@@ -22,8 +22,12 @@
 </head>
 
 <body>
-  <mu-history provides="desi:history">
-    <mu-auth provides="desi:auth" redirect="/app/login">
+  <!-- Provide all contexts -->
+  <mu-context></mu-context>
+
+  <!-- Corrected Provider Nesting Order -->
+  <mu-auth provides="desi:auth" redirect="/app/login">
+    <mu-history provides="desi:history">
       <mu-store provides="desi:model">
         <article class="page">
           <!-- Header -->
@@ -67,8 +71,8 @@
           <mu-switch></mu-switch>
         </article>
       </mu-store>
-    </mu-auth>
-  </mu-history>
+    </mu-history>
+  </mu-auth>
 
   <!-- Optional JS -->
   <script type="module" src="/scripts/dark-mode.js"></script>

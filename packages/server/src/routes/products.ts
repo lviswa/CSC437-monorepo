@@ -41,7 +41,7 @@ router.post("/", (req: Request, res: Response) => {
     .catch((err) => res.status(500).send(err));
 });
 
-// PUT /api/products/:productid
+// PUT /api/products/:productid (replace entire product)
 router.put("/:productid", (req: Request, res: Response) => {
   const { productid } = req.params;
   const newProduct = req.body;
@@ -49,6 +49,30 @@ router.put("/:productid", (req: Request, res: Response) => {
   Products.update(productid, newProduct)
     .then((product: Product) => res.json(product))
     .catch((err) => res.status(404).send(err));
+});
+
+// PATCH /api/products/:productid
+router.patch("/:productid", async (req: Request, res: Response): Promise<void> => {
+  const { productid } = req.params;
+  const updates = req.body;
+
+  try {
+    const existing = await Products.get(productid);
+    if (!existing) {
+      res.status(404).send("Product not found");
+      return;
+    }
+    const updated = {
+      ...existing,
+      ...updates,
+      price: Number(updates.price ?? existing.price),
+    };    
+    const saved = await Products.update(productid, updated);
+    res.json(saved);
+  } catch (err) {
+    console.error("Error in PATCH:", err);
+    res.status(500).send(err);
+  }
 });
 
 // DELETE /api/products/:productid

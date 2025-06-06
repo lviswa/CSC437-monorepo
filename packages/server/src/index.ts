@@ -3,11 +3,11 @@ import dotenv from "dotenv";
 import path from "path";
 import fs from "node:fs/promises";
 
+import cors from "cors";
 import { connect } from "./services/mongo";
 import Products from "./services/product-svc";
 import products from "./routes/products";
 import auth, { authenticateUser } from "./routes/auth";
-import cors from "cors";
 
 dotenv.config();
 
@@ -20,31 +20,36 @@ connect("desithreads");
 app.use(cors());
 app.use(express.json());
 
-// Static directory config
+// Set static directory
 const staticDir = process.env.STATIC
   ? path.resolve(__dirname, process.env.STATIC)
   : path.resolve(__dirname, "../../proto/dist");
 
-// Serve static files (e.g., CSS, JS, assets)
+// Serve static assets (CSS, JS, etc.)
 app.use(express.static(staticDir));
 
 // Auth routes
 app.use("/auth", auth);
 
-// Protected product API
+// ✅ Protected product routes
 app.use("/api/products", authenticateUser, products);
 
-// Sample unprotected products route for testing
-app.get("/products", async (_, res: Response) => {
-  const list = await Products.index();
-  res.json(list);
+// 🔍 Optional unprotected GET for testing
+app.get("/products", async (_req, res: Response) => {
+  try {
+    const list = await Products.index();
+    res.json(list);
+  } catch (err) {
+    console.error("Failed to load products:", err);
+    res.status(500).send("Failed to load products");
+  }
 });
 
-// 🔹 Serve SPA for all /app routes
+// 🔹 Serve index.html for all /app routes (SPA support)
 app.use("/app", async (_req: Request, res: Response) => {
-  const indexHtml = path.join(staticDir, "index.html");
+  const indexPath = path.join(staticDir, "index.html");
   try {
-    const html = await fs.readFile(indexHtml, "utf8");
+    const html = await fs.readFile(indexPath, "utf8");
     res.send(html);
   } catch (err) {
     console.error("Failed to load app index.html", err);
@@ -52,12 +57,12 @@ app.use("/app", async (_req: Request, res: Response) => {
   }
 });
 
-// 🔸 Optional: Serve index.html at root as fallback
-app.get("/", (_, res) => {
+// 🔸 Optional fallback to serve SPA from root
+app.get("/", (_req, res) => {
   res.sendFile(path.join(staticDir, "index.html"));
 });
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`🚀 Server running at http://localhost:${port}`);
 });

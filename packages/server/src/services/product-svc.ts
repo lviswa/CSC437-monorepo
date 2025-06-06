@@ -5,8 +5,9 @@ const ProductSchema = new Schema<Product>(
   {
     productid: { type: String, required: true, unique: true },
     name: { type: String, required: true },
-    price: { type: String, required: true },
-    imgSrc: { type: String, required: true }
+    price: { type: Number, required: true },
+    imgSrc: { type: String, required: true },
+    category: { type: String, required: true }
   },
   { collection: "products" }
 );

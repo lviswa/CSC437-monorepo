@@ -6,10 +6,11 @@ export interface DesiProduct {
     image: string;
     category: string;
   }
-  
+
   export interface Model {
     products?: DesiProduct[];
-  }
+    selectedProduct?: DesiProduct;
+  }  
   
   export const init: Model = {};
   

@@ -1,4 +1,4 @@
-import { define, Auth, History, Switch, Store } from "@calpoly/mustang";
+import { define, Auth, History, Store, Switch } from "@calpoly/mustang";
 import { html } from "lit";
 
 import { Msg } from "./messages";
@@ -9,28 +9,36 @@ import { HomeViewElement } from "./views/home-view";
 import { WomenViewElement } from "./views/women-view";
 import { LoginViewElement } from "./views/login-view";
 import { NewUserViewElement } from "./views/newuser-view";
+import { ProductEditView } from "./views/product-edit-view";
 
-const routes = [
-  {
-    path: "/app/women",
-    view: () => html`<women-view></women-view>`
-  },
-  {
-    path: "/app",
-    view: () => html`<home-view></home-view>`
-  },
-  {
-    path: "/app/login",
-    view: () => html`<login-view></login-view>`
-  },
-  {
-    path: "/app/newuser",
-    view: () => html`<newuser-view></newuser-view>`
-  },  
-  {
-    path: "/",
-    redirect: "/app"
-  }
+const routes: Switch.Route[] = [
+    {
+        path: "/app/product/:id/edit",
+        view: (params) => {
+          const { id } = params as { id: string };
+          return html`<product-edit-view .id=${id}></product-edit-view>`;
+        }
+    },      
+    {
+      path: "/app/women",
+      view: () => html`<women-view></women-view>`
+    },
+    {
+      path: "/app/login",
+      view: () => html`<login-view></login-view>`
+    },
+    {
+      path: "/app/newuser",
+      view: () => html`<newuser-view></newuser-view>`
+    },
+    {
+      path: "/app",
+      view: () => html`<home-view></home-view>`
+    },
+    {
+      path: "/",
+      redirect: "/app"
+    }  
 ];
 
 define({
@@ -49,5 +57,6 @@ define({
   "home-view": HomeViewElement,
   "women-view": WomenViewElement,
   "login-view": LoginViewElement,
-  "newuser-view": NewUserViewElement
+  "newuser-view": NewUserViewElement,
+  "product-edit-view": ProductEditView
 });
