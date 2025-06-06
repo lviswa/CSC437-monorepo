@@ -19,9 +19,10 @@ connect("desithreads");
 app.use(cors());
 app.use(express.json());
 
+// Set static directory (defaults to app/dist)
 const staticDir = process.env.STATIC
   ? path.resolve(__dirname, process.env.STATIC)
-  : path.resolve(__dirname, "../../proto/dist");
+  : path.resolve(__dirname, "../../app/dist");
 
 app.use(express.static(staticDir));
 

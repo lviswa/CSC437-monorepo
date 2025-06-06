@@ -36,7 +36,7 @@ const port = process.env.PORT || 3e3;
 (0, import_mongo.connect)("desithreads");
 app.use((0, import_cors.default)());
 app.use(import_express.default.json());
-const staticDir = process.env.STATIC ? import_path.default.resolve(__dirname, process.env.STATIC) : import_path.default.resolve(__dirname, "../../proto/dist");
+const staticDir = process.env.STATIC ? import_path.default.resolve(__dirname, process.env.STATIC) : import_path.default.resolve(__dirname, "../../app/dist");
 app.use(import_express.default.static(staticDir));
 app.use("/auth", import_auth.default);
 app.use("/api/products", import_auth.authenticateUser, import_products.default);
