@@ -30,7 +30,7 @@ var import_mongo = require("./services/mongo");
 var import_product_svc = __toESM(require("./services/product-svc"));
 var import_products = __toESM(require("./routes/products"));
 var import_auth = __toESM(require("./routes/auth"));
-import_dotenv.default.config();
+import_dotenv.default.config({ path: import_path.default.resolve(__dirname, "../.env") });
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
 (0, import_mongo.connect)("desithreads");

@@ -9,7 +9,7 @@ import Products from "./services/product-svc";
 import products from "./routes/products";
 import auth, { authenticateUser } from "./routes/auth";
 
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 const app = express();
 const port = process.env.PORT || 3000;
