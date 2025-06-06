@@ -1,0 +1,23 @@
+:root {
+    --color-background-page: #ee5470;       
+    --color-background-header: #fa9062;       
+    --color-text-default: #000000;           
+    --color-text-header: #000000;             
+    --color-accent: #f36f38;                  
+    --color-accent-alt: #800000;             
+    --color-accent-hover: #cc7a00;
+    --color-background-sage: #7ac994;            
+  
+    --font-family-default: 'Segoe UI', sans-serif;
+  }
+  
+  body.dark-mode {
+    --color-background-page: #c61857;                 
+    --color-background-header: #66023c;            
+    --color-text-default: #f0f0f0;                 
+    --color-text-header: #000000;
+    --color-accent: #ffcc66;                       
+    --color-accent-alt: #ff9999;                   
+    --color-accent-hover: #e6b84f;                 
+  }
+  
