@@ -20,21 +20,18 @@ connect("desithreads");
 app.use(cors());
 app.use(express.json());
 
-// Set static directory
+// Set static directory (defaults to app/dist)
 const staticDir = process.env.STATIC
   ? path.resolve(__dirname, process.env.STATIC)
-  : path.resolve(__dirname, "../../proto/dist");
+  : path.resolve(__dirname, "../../app/dist");
 
-// Serve static assets (CSS, JS, etc.)
 app.use(express.static(staticDir));
 
-// Auth routes
+// --- API Routes ---
 app.use("/auth", auth);
-
-// ✅ Protected product routes
 app.use("/api/products", authenticateUser, products);
 
-// 🔍 Optional unprotected GET for testing
+// --- Optional testing route ---
 app.get("/products", async (_req, res: Response) => {
   try {
     const list = await Products.index();
@@ -45,21 +42,16 @@ app.get("/products", async (_req, res: Response) => {
   }
 });
 
-// 🔹 Serve index.html for all /app routes (SPA support)
-app.use("/app", async (_req: Request, res: Response) => {
+// --- Catch-all route to support SPA routing ---
+app.get("*", async (req: Request, res: Response) => {
   const indexPath = path.join(staticDir, "index.html");
   try {
     const html = await fs.readFile(indexPath, "utf8");
     res.send(html);
   } catch (err) {
-    console.error("Failed to load app index.html", err);
+    console.error("Failed to load index.html for route", req.url, err);
     res.status(500).send("Internal Server Error");
   }
-});
-
-// 🔸 Optional fallback to serve SPA from root
-app.get("/", (_req, res) => {
-  res.sendFile(path.join(staticDir, "index.html"));
 });
 
 // Start server
