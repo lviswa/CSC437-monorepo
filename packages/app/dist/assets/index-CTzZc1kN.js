@@ -643,7 +643,7 @@ Expecting `+$t.join(", ")+", got '"+(this.terminals_[w]||w)+"'":Bt="Parse error 
           <h1 class="title">DESI THREADS</h1>
           <main class="card">
             <h2>User Login</h2>
-            <login-form .api=${"http://localhost:3000/auth/login"} redirect="/app">
+            <login-form api='/auth/login' redirect="/app">
               <label>
                 Username:
                 <input name="username" autocomplete="off" />
