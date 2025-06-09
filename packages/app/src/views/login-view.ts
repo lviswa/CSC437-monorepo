@@ -60,13 +60,15 @@ export class LoginViewElement extends LitElement {
   `;
 
   render() {
+    const apiBase = import.meta.env.VITE_API_URL || window.location.origin;
+  
     return html`
       <mu-auth>
         <div class="container">
           <h1 class="title">DESI THREADS</h1>
           <main class="card">
             <h2>User Login</h2>
-            <login-form api="/auth/login" redirect="/app">
+            <login-form .api=${`${apiBase}/auth/login`} redirect="/app">
               <label>
                 Username:
                 <input name="username" autocomplete="off" />
@@ -84,5 +86,5 @@ export class LoginViewElement extends LitElement {
         </div>
       </mu-auth>
     `;
-  }
+  }  
 }

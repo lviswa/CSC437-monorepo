@@ -55,24 +55,37 @@ export default function update(
 }
 
 function loadProducts(user: Auth.User): Promise<DesiProduct[]> {
-  console.log("📡 [loadProducts] Fetching with user:", user);
-  return fetch("/api/products", {
-    headers: Auth.headers(user),
-  })
-    .then((res) => (res.status === 200 ? res.json() : []))
-    .then((json) => {
-      console.log("📄 [loadProducts] Raw server product data:", json);
-      const mapped = json.map((item: any) => ({
-        id: item.productid,
-        name: item.name,
-        price: Number(item.price),
-        image: item.imgSrc,
-        category: item.category ?? "women",
-      }));
-      console.log("✅ [loadProducts] Mapped products:", mapped);
-      return mapped;
-    });
-}
+    console.log("📡 [loadProducts] Fetching with user:", user);
+  
+    // Fallback in case Auth.headers(user) doesn't return a valid token
+    const token = localStorage.getItem("authToken");
+  
+    const headers: HeadersInit = {
+      ...Auth.headers(user),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    };
+  
+    return fetch("/api/products", { headers })
+      .then((res) => {
+        if (!res.ok) {
+          console.warn("⚠️ [loadProducts] Server responded with:", res.status);
+          return [];
+        }
+        return res.json();
+      })
+      .then((json) => {
+        console.log("📄 [loadProducts] Raw server product data:", json);
+        const mapped = json.map((item: any) => ({
+          id: item.productid,
+          name: item.name,
+          price: Number(item.price),
+          image: item.imgSrc,
+          category: item.category ?? "women",
+        }));
+        console.log("✅ [loadProducts] Mapped products:", mapped);
+        return mapped;
+      });
+  }  
 
 function saveProduct(
   id: string,
