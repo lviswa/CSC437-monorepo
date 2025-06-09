@@ -9,7 +9,8 @@ import Products from "./services/product-svc";
 import products from "./routes/products";
 import auth, { authenticateUser } from "./routes/auth";
 
-dotenv.config({ path: path.resolve(__dirname, "../.env") });
+dotenv.config();
+console.log("✅ Loaded MONGODB_URI:", process.env.MONGODB_URI);
 
 const app = express();
 const port = process.env.PORT || 3000;
