@@ -52,6 +52,7 @@ app.get("/products", async (_req, res) => {
 });
 app.use("/app", async (_req, res) => {
   const indexPath = import_path.default.join(staticDir, "index.html");
+  console.log("sending", indexPath);
   try {
     const html = await import_promises.default.readFile(indexPath, "utf8");
     res.send(html);
@@ -61,6 +62,7 @@ app.use("/app", async (_req, res) => {
   }
 });
 app.get("/", (_req, res) => {
+  console.log("sending", staticDir);
   res.sendFile(import_path.default.join(staticDir, "index.html"));
 });
 app.listen(port, () => {

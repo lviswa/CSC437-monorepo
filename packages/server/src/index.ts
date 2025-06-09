@@ -43,6 +43,7 @@ app.get("/products", async (_req, res: Response) => {
 
 app.use("/app", async (_req: Request, res: Response) => {
   const indexPath = path.join(staticDir, "index.html");
+  console.log("sending", indexPath)
   try {
     const html = await fs.readFile(indexPath, "utf8");
     res.send(html);
@@ -53,6 +54,7 @@ app.use("/app", async (_req: Request, res: Response) => {
 });
 
 app.get("/", (_req, res) => {
+  console.log("sending", staticDir)
   res.sendFile(path.join(staticDir, "index.html"));
 });
 
